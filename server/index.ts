@@ -3,6 +3,7 @@ import webpack from 'webpack'
 import { Server as HTTPServer } from 'http'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackConfig from '../webpack.config'
+import { connectToDB } from './db'
 
 const PORT = 3000
 const app = express()
@@ -36,6 +37,12 @@ app.get('/api/data', (req: Request, res: Response) => {
   res.send('hello from nodejs server!')
 })
 
-httpServer.listen(PORT, () => {
-  console.log(`App is running on port ${PORT}`)
-})
+async function startHttpServer() {
+  await connectToDB()
+
+  httpServer.listen(PORT, () => {
+    console.log(`App is running on port ${PORT}`)
+  })
+}
+
+startHttpServer()
