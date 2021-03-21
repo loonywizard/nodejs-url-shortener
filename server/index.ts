@@ -1,4 +1,6 @@
 import express, { Request, Response } from 'express'
+import { json as jsonBodyParser } from 'body-parser'
+import { nanoid } from 'nanoid'
 import webpack from 'webpack'
 import { Server as HTTPServer } from 'http'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -9,6 +11,8 @@ import { connectToDB } from './db'
 
 const PORT = 3000
 const app = express()
+
+app.use(jsonBodyParser())
 
 const httpServer = new HTTPServer(app)
 
@@ -35,8 +39,37 @@ app.get('/', (req: Request, res: Response) => {
   `)
 })
 
-app.get('/api/data', (req: Request, res: Response) => {
-  res.send('hello from nodejs server!')
+app.post('/api/add-url', async (req: Request, res: Response) => {
+  try {
+    // TODO: validate url
+
+    // TODO: req.path.slice(1) refactor
+    const existingUrl: IUrl | null = await UrlModel.findOne({ shortUrl: req.body.url.slice(1) }).exec()
+
+    if (existingUrl !== null) return res.send({ shortUrl: existingUrl.shortUrl })
+    
+    // TODO: refactor withour let
+    let isUniq = false
+    let generatedShortUrl = null
+
+    while (!isUniq) {
+      generatedShortUrl = nanoid(10)
+      
+      const url: IUrl | null = await UrlModel.findOne({ shortUrl: generatedShortUrl }).exec()
+
+      if (url === null) isUniq = true
+    }
+    
+    const url = await UrlModel.create({ shortUrl: generatedShortUrl, fullUrl: req.body.url })
+
+    await url.save()
+
+    res.send({ shortUrl: url.shortUrl })
+  } catch (error) {
+    console.error(error)
+
+    res.status(500).send('Internal Server Error')
+  }
 })
 
 app.get('*', async (req: Request, res: Response) => {
