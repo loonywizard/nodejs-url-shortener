@@ -1,17 +1,6 @@
-import mongoose, { model, Schema, Document } from 'mongoose'
+import mongoose from 'mongoose'
+import { IURL, URLModel } from './models/url'
 
-
-interface IURL extends Document {
-  shortUrl: string,
-  fullUrl: string,
-}
-
-const URLSchema = new Schema<IURL>({
-  shortUrl: { type: String, required: true },
-  fullUrl: { type: String, required: true },
-}) 
-
-const URLModel = model<IURL>('URL', URLSchema)
 
 async function initTestData() {
   const url1: IURL = await URLModel.create({ shortUrl: 'goo', fullUrl: 'https://google.com' })
