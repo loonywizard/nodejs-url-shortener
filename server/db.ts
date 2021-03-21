@@ -1,16 +1,16 @@
 import mongoose from 'mongoose'
-import { IURL, URLModel } from './models/url'
+import { IUrl, UrlModel } from './models/url'
 
 
 async function initTestData() {
-  const url1: IURL = await URLModel.create({ shortUrl: 'goo', fullUrl: 'https://google.com' })
-  const url2: IURL = await URLModel.create({ shortUrl: 'yt', fullUrl: 'https://youtube.com' })
+  const url1: IUrl = await UrlModel.create({ shortUrl: 'goo', fullUrl: 'https://google.com' })
+  const url2: IUrl = await UrlModel.create({ shortUrl: 'yt', fullUrl: 'https://youtube.com' })
 
   await Promise.all(
     [url1, url2].map((cat) => cat.save())
   ).then(() => console.log('urls saved to DB!'))
 
-  URLModel.find((err, urls) => {
+  UrlModel.find((err, urls) => {
     if (err) return console.error(err)
     
     console.log(urls)

@@ -1,16 +1,16 @@
 import { model, Schema, Document } from 'mongoose'
 
 
-interface IURL extends Document {
+interface IUrl extends Document {
   shortUrl: string,
   fullUrl: string,
 }
 
-const URLSchema = new Schema<IURL>({
+const UrlSchema = new Schema<IUrl>({
   shortUrl: { type: String, required: true },
   fullUrl: { type: String, required: true },
 }) 
 
-const URLModel = model<IURL>('URL', URLSchema)
+const UrlModel = model<IUrl>('url', UrlSchema)
 
-export { IURL, URLModel }
+export { IUrl, UrlModel }
