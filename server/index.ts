@@ -16,7 +16,7 @@ import { connectToDB } from './db'
 
 const isProd = process.env.NODE_ENV === 'production'
 
-const PORT = isProd ? 80 : 3000
+const PORT = process.env.PORT || 3000
 const app = express()
 
 app.use(jsonBodyParser())
