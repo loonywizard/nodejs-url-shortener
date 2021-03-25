@@ -1,3 +1,4 @@
+import 'normalize.css'
 import React from 'react'
 import { AddUrlForm } from '../AddUrlForm'
 import { StyledContainer, GlobalStyle } from './styled'
