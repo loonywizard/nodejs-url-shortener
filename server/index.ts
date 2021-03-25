@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 import express, { Request, Response } from 'express'
 import { json as jsonBodyParser } from 'body-parser'
 import { nanoid } from 'nanoid'
@@ -7,6 +9,8 @@ import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackConfig from '../webpack.config'
 import { IUrl, UrlModel } from './models/url'
 import { connectToDB } from './db'
+
+
 
 
 const PORT = 3000
