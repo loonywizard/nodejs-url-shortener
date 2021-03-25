@@ -22,6 +22,7 @@ const StyledContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 10px;
 `
 
 export { StyledContainer, GlobalStyle }

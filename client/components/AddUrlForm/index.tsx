@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import {
+  StyledForm,
+  StyledInput,
+  StyledButton,
+} from './styled'
 
 
 function AddUrlForm(): JSX.Element {
@@ -31,14 +36,14 @@ function AddUrlForm(): JSX.Element {
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <input value={url} onChange={onUrlChange} disabled={isLoading} />
+    <StyledForm onSubmit={onFormSubmit}>
+      <StyledInput value={url} onChange={onUrlChange} disabled={isLoading} />
 
-      <button type="submit" disabled={isLoading}>Submit url</button>
+      <StyledButton type="submit" disabled={isLoading}>Submit url</StyledButton>
 
       {shortUrl && <div>Short url: {shortUrl}</div>}
       {error && <div>Error: {error}</div>}
-    </form>
+    </StyledForm>
   )
 }
 
