@@ -14,14 +14,14 @@ import { connectToDB } from './db'
 
 
 
-const PORT = 3000
+const isProd = process.env.NODE_ENV === 'production'
+
+const PORT = isProd ? 80 : 3000
 const app = express()
 
 app.use(jsonBodyParser())
 
 const httpServer = new HTTPServer(app)
-
-const isProd = process.env.NODE_ENV === 'production'
 
 // const publicPath = (webpackConfig.output && webpackConfig.output.publicPath || '') as string
 
