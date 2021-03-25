@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "server"
+  ],
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "dist"
+  }
+}

@@ -4,6 +4,7 @@ import express, { Request, Response } from 'express'
 import { json as jsonBodyParser } from 'body-parser'
 import { nanoid } from 'nanoid'
 import webpack from 'webpack'
+import path from 'path'
 import { Server as HTTPServer } from 'http'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackConfig from '../webpack.config'
@@ -22,11 +23,11 @@ const httpServer = new HTTPServer(app)
 
 const isProd = process.env.NODE_ENV === 'production'
 
-const outputPath = webpackConfig.output && webpackConfig.output.path || ''
 // const publicPath = (webpackConfig.output && webpackConfig.output.publicPath || '') as string
 
 if (isProd) {
-  app.use('/static', express.static(outputPath))
+  // in prod server will be in dist/server folder
+  app.use('/static', express.static(path.resolve(__dirname, '../client')))
 } else {
   const webpackCompiler = webpack(webpackConfig)
 

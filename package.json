@@ -8,8 +8,8 @@
   "private": false,
   "scripts": {
     "dev": "ts-node server/index.ts",
-    "build": "NODE_ENV=production webpack",
-    "start": "NODE_ENV=production ts-node server/index.ts"
+    "build": "NODE_ENV=production webpack && tsc --noEmit false -p tsconfig.server.json",
+    "start": "NODE_ENV=production node dist/server/index.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

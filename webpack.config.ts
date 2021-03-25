@@ -8,7 +8,7 @@ const config: Configuration = {
   mode: isProd ? 'production' : 'development',
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist/client'),
     publicPath: '/static',
   },
   module: {
