@@ -1,15 +1,23 @@
 import React from 'react'
 import { AddUrlForm } from '../AddUrlForm'
-import { GlobalStyle } from './styled'
+import { StyledContainer, GlobalStyle } from './styled'
 
 
 function App() {
   return (
+    <StyledContainer>
+      <AddUrlForm />
+    </StyledContainer>
+  )
+}
+
+function AppWithGlobalStyles() {
+  return (
     <>
       <GlobalStyle />
-      <AddUrlForm />
+      <App />
     </>
   )
 }
 
-export { App }
+export { AppWithGlobalStyles as App }

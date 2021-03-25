@@ -1,9 +1,14 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   html, body {
     padding: 0;
     margin: 0;
+    height: 100%;
+  }
+
+  #app {
+    height: 100%;
   }
 
   * {
@@ -12,4 +17,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-export { GlobalStyle }
+const StyledContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`
+
+export { StyledContainer, GlobalStyle }
