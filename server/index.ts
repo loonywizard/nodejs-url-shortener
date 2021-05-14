@@ -12,8 +12,6 @@ import { IUrl, UrlModel } from './models/url'
 import { connectToDB } from './db'
 
 
-
-
 const isProd = process.env.NODE_ENV === 'production'
 
 const PORT = process.env.PORT || 3000
@@ -35,17 +33,7 @@ if (isProd) {
 }
 
 app.get('/', (req: Request, res: Response) => {
-  res.send(`
-    <!DOCTYPE html>
-    <head>
-      <title>nodejs-url-shortener</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-      <div id="app"></div>
-      <script src="static/index.js"></script>
-    </body>
-  `)
+  res.sendFile(path.join(__dirname, '../assets/index.html'))
 })
 
 app.post('/api/add-url', async (req: Request, res: Response) => {
