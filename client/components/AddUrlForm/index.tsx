@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { isValidUrl } from '../../../common/validationRules/isValidUrl'
 import {
   StyledForm,
   StyledInput,
@@ -8,10 +9,10 @@ import {
 
 
 function AddUrlForm(): JSX.Element {
-  const [url, setUrl] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [shortUrl, setShortUrl] = useState(null)
+  const [url, setUrl] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+  const [shortUrl, setShortUrl] = useState<string | null>(null)
 
   function onUrlChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setUrl(event.target.value)
@@ -20,18 +21,18 @@ function AddUrlForm(): JSX.Element {
   async function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
+    if (!isValidUrl(url)) return setError('invalid url')
+
     setIsLoading(true)
     setError(null)
 
-    // TODO setError if not valid url
-
     try {
       const { data } = await axios.post('/api/add-url', { url })
-      
+
       setShortUrl(data.shortUrl)
       setIsLoading(false)
     } catch (error) {
-      setError(error)
+      setError(error.response.data)
     }
   }
 
