@@ -1,13 +1,15 @@
 import { Request, Response } from 'express'
 import { nanoid } from 'nanoid'
 import { IUrl, UrlModel } from '../models/url'
+import { isValidUrl } from '../../common/validationRules/isValidUrl'
 
 
 async function addUrlController(req: Request, res: Response) {
-  try {
-    // TODO: validate url
+  try {    
+    // better exceptions
+    if (!isValidUrl(req.body.url)) throw new Error('invalid url')
 
-    const existingUrl: IUrl | null = await UrlModel.findOne({ shortUrl: req.body.url.slice(1) }).exec()
+    const existingUrl: IUrl | null = await UrlModel.findOne({ fullUrl: req.body.url }).exec()
 
     if (existingUrl !== null) return res.send({ shortUrl: existingUrl.shortUrl })
     
