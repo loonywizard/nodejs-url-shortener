@@ -33,7 +33,9 @@ if (isProd) {
 }
 
 app.get('/', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '../assets/index.html'))
+  const indexHtmlPath = isProd ? '../../assets/index.html' : '../assets/index.html'
+
+  res.sendFile(path.join(__dirname, indexHtmlPath))
 })
 
 app.post('/api/add-url', addUrlController)
