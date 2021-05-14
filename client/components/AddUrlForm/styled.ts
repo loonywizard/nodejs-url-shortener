@@ -3,8 +3,8 @@ import styled from "styled-components";
 const StyledForm = styled.form`
   display: flex;
   width: 100%;
-  max-width: 700px;
-  height: 40px;
+  max-width: 600px;
+  height: 32px;
 `
 
 const StyledInput = styled.input`
@@ -22,10 +22,10 @@ const StyledInput = styled.input`
 const StyledButton = styled.button`
   border-radius: 0 5px 5px 0;
   border: none;
-  padding: 10px 30px;
+  padding: 5px 20px;
   background-color: #008ae6;
   color: white;
-  font-size: 18px;
+  font-size: 14px;
 
   &:hover {
     cursor: pointer;
